@@ -9,6 +9,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SemesterReportController;
 use App\Http\Controllers\YearlyReportController;
 use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,14 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('dashboard');
 // });
+// Livewire::setScriptRoute(function($handle){
+//     return Route::get('jempolan/public/livewire/livewire.js',$handle);
+// });
+
+// Livewire::setUpdateRoute(function($handle){
+//     return Route::get('jempolan/public/livewire/update',$handle);
+// });
+
 
 Route::middleware('guest')->group(function(){
     Route::get('/login',[OtentifikasiController::class,'index'])->name('login');
