@@ -238,7 +238,7 @@ class MonthlyReportController extends Controller
             
        
       
-        return redirect()->to(url('report/bulanan/perdata'))->with('success','Data berhasil disimpan');
+        return redirect()->to(url('report/bulanan/'.$request->level_name))->with('success','Data berhasil disimpan');
         
 
 

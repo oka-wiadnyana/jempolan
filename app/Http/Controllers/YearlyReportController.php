@@ -236,7 +236,7 @@ class YearlyReportController extends Controller
             
        
       
-        return redirect()->to(url('report/tahunan/perdata'))->with('success','Data berhasil disimpan');
+        return redirect()->to(url('report/tahunan/'.$request->level_name))->with('success','Data berhasil disimpan');
         
 
 

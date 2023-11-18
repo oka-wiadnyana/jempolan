@@ -15,7 +15,7 @@
         <script src=" https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.js"></script>
 
         <script>
-            axios.get('/get_data_chart')
+            axios.get('{{ url("/get_data_chart") }}')
             .then(function (response) {
                 // handle success
                console.log(response.data)

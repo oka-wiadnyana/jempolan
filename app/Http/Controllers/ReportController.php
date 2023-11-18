@@ -243,7 +243,7 @@ class ReportController extends Controller
             
        
       
-        return redirect()->to(url('report/mingguan/perdata'))->with('success','Data berhasil disimpan');
+        return redirect()->to(url('report/mingguan/'.$request->level_name))->with('success','Data berhasil disimpan');
         
 
 

@@ -81,6 +81,7 @@
                         </div>
                         <input type="hidden" name="report_id" value="{{ $report_id }}">
                         <input type="hidden" name="mode" value="{{ $mode }}">
+                        <input type="hidden" name="level_name" value="{{ $level_name }}">
                         
                         {{-- <div x-data="{show_submit:{{ $mode==''?true:false }} }">
 
