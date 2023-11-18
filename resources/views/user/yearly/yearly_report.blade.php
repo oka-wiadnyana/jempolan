@@ -41,7 +41,7 @@
     <livewire:modal-upload />
     <livewire:modal-add-laporan-tahunan />
     <livewire:modal-edit-laporan-tahunan />
-   
+    <livewire:modal-download-laporan />
     @push('foot')
         <script>
             $(function() {
@@ -96,7 +96,9 @@
             function showModalUpload(id,periode){
                 Livewire.dispatch('show-modal-upload',{'id':id,'periode':periode});
             }
-
+            function showModalDownload(id){
+                Livewire.dispatch('show-modal-download-laporan',{'id':id,'periode':'tahunan'});
+            }
             function deleteLaporan(id){
                 Swal.fire({
                     title: "Yakin dihapus?",

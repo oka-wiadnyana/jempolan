@@ -84,7 +84,7 @@ Route::middleware('auth')->group(function(){
         Route::post('/report/delete_laporan_mingguan', 'deleteLaporanMingguan');
         Route::post('/insert_monev_mingguan', 'insertMonev');
         Route::post('/insert_tl_mingguan', 'insertTl');
-        Route::get('/download_monev_mingguan/{id}', 'downloadMonev');
+        Route::post('/download_monev_mingguan', 'downloadMonev');
         Route::post('/report/upload_mingguan', 'upload');
         
         
@@ -101,7 +101,7 @@ Route::middleware('auth')->group(function(){
         Route::post('/report/delete_laporan_bulanan', 'deleteLaporanBulanan');
         Route::post('/insert_monev_bulanan', 'insertMonev');
         Route::post('/insert_tl_bulanan', 'insertTl');
-        Route::get('/download_monev_bulanan/{id}', 'downloadMonev');
+        Route::post('/download_monev_bulanan', 'downloadMonev');
         Route::post('/report/upload_bulanan', 'upload');
         
     });
@@ -118,7 +118,7 @@ Route::middleware('auth')->group(function(){
         Route::post('/report/delete_laporan_triwulan', 'deleteLaporanTriwulan');
         Route::post('/insert_monev_triwulan', 'insertMonev');
         Route::post('/insert_tl_triwulan', 'insertTl');
-        Route::get('/download_monev_triwulan/{id}', 'downloadMonev');
+        Route::post('/download_monev_triwulan', 'downloadMonev');
         Route::post('/report/upload_triwulan', 'upload');
         
     });
@@ -135,7 +135,7 @@ Route::middleware('auth')->group(function(){
         Route::post('/report/delete_laporan_semester', 'deleteLaporanSemester');
         Route::post('/insert_monev_semester', 'insertMonev');
         Route::post('/insert_tl_semester', 'insertTl');
-        Route::get('/download_monev_semester/{id}', 'downloadMonev');
+        Route::post('/download_monev_semester', 'downloadMonev');
         Route::post('/report/upload_semester', 'upload');
         
     });
@@ -151,7 +151,7 @@ Route::middleware('auth')->group(function(){
         Route::post('/report/delete_laporan_tahunan', 'deleteLaporanTahunan');
         Route::post('/insert_monev_tahunan', 'insertMonev');
         Route::post('/insert_tl_tahunan', 'insertTl');
-        Route::get('/download_monev_tahunan/{id}', 'downloadMonev');
+        Route::post('/download_monev_tahunan', 'downloadMonev');
         Route::post('/report/upload_tahunan', 'upload');
         
         

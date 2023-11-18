@@ -42,6 +42,7 @@
     <livewire:modal-upload />
     <livewire:modal-add-laporan-mingguan />
     <livewire:modal-edit-laporan-mingguan />
+    <livewire:modal-download-laporan />
    
     @push('foot')
         <script>
@@ -103,6 +104,9 @@
            
             function showModalUpload(id,periode){
                 Livewire.dispatch('show-modal-upload',{'id':id,'periode':periode});
+            }
+            function showModalDownload(id){
+                Livewire.dispatch('show-modal-download-laporan',{'id':id,'periode':'mingguan'});
             }
 
             function deleteLaporan(id){

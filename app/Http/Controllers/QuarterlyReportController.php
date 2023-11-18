@@ -52,10 +52,10 @@ class QuarterlyReportController extends Controller
                         }
                      
                       $btn_tl=$monev_exist?'<a href="'.url('/add_tl_monev_quarterly/'.$row->id.'/'.$row->level_id.'/'.$mode_tl).'" class="detail btn btn-secondary btn-sm" >TL</a>':'';
-                        $actionBtn = '<a href="'.url('/add_monev_quarterly/'.$row->id.'/'.$row->level_id.'/'.$mode).'" class="detail btn btn-warning btn-sm" >Monev</a> <a href="" class="edit btn btn-success btn-sm" onclick="showModalEdit('.$row->id.'); return false">Edit</a> <a href=""  onclick="deleteLaporan('.$row->id.');return false" class="delete btn btn-danger btn-sm">Delete</a> <a href="'.url('/download_monev_triwulan/'.$row->id).'" class="detail btn btn-info btn-sm" >Download</a> '.$btn_tl;
+                        $actionBtn = '<a href="'.url('/add_monev_quarterly/'.$row->id.'/'.$row->level_id.'/'.$mode).'" class="detail btn btn-warning btn-sm" >Monev</a> <a href="" class="edit btn btn-success btn-sm" onclick="showModalEdit('.$row->id.'); return false">Edit</a> <a href=""  onclick="deleteLaporan('.$row->id.');return false" class="delete btn btn-danger btn-sm">Delete</a> <a href="'.url('/download_monev_triwulan/'.$row->id).'" class="detail btn btn-info btn-sm" onclick="showModalDownload('.$row->id.'); return false">Download</a> '.$btn_tl;
                     }else {
 
-                        $actionBtn = '<a href="'.url('/download_monev_triwulan/'.$row->id).'" class="detail btn btn-info btn-sm" >Download</a>';
+                        $actionBtn = '<a href="'.url('/download_monev_triwulan/'.$row->id).'" class="detail btn btn-info btn-sm" onclick="showModalDownload('.$row->id.'); return false">Download</a>';
                     }
                     return $actionBtn;
                 })
@@ -240,26 +240,50 @@ class QuarterlyReportController extends Controller
     }
 
 
-    public function downloadMonev($id)
+    public function downloadMonev(Request $request)
     {
+        $validate=Validator::make(
+            $request->all(),
+            [
+                'jenis_laporan'=>'required'
+            ]
+            );
+        
+        if($validate->fails()){
+            return back()->withErrors($validate);
+        }
+        $id=$request->id;
         $report = QuarterlyReport::where('id',$id)->first();
         $monevs=MonevQuarterly::where('report_id',$id)->get();
        
         $data_template=[];
         $no=1;
-        foreach($monevs as $monev){
-            $data_template[]=['no'=>$no++,'objek_monitoring'=>$monev->object_name, 'kesesuaian'=>$monev->kesesuaian,'ketidaksesuaian'=>$monev->ketidaksesuaian,'tindakan_perbaikan'=>$monev->tindakan_perbaikan,'penanggung_jawab'=>$monev->penanggung_jawab,'close_date'=>Carbon::parse($monev->close_date)->isoFormat('DD MMMM YYYY')];
+
+        if($request->jenis_laporan=='monev'){
+            foreach($monevs as $monev){
+                $data_template[]=['no'=>$no++,'objek_monitoring'=>$monev->object_name, 'kesesuaian'=>$monev->kesesuaian,'ketidaksesuaian'=>$monev->ketidaksesuaian,'tindakan_perbaikan'=>$monev->tindakan_perbaikan,'penanggung_jawab'=>$monev->penanggung_jawab,'close_date'=>Carbon::parse($monev->close_date)->isoFormat('DD MMMM YYYY')];
+            }
+            $template = new TemplateProcessor(public_path('/template/template.docx'));
+            $tanggalRead = Carbon::parse($report->report_date)->isoFormat('DD MMMM YYYY');
+        }elseif($request->jenis_laporan=='tl'){
+            foreach($monevs as $monev){
+                $data_template[]=['no'=>$no++,'objek_monitoring'=>$monev->object_name, 'kesesuaian'=>$monev->kesesuaian,'ketidaksesuaian'=>$monev->ketidaksesuaian,'tindakan_perbaikan'=>$monev->tindakan_perbaikan,'penanggung_jawab'=>$monev->penanggung_jawab,'close_date'=>Carbon::parse($monev->close_date)->isoFormat('DD MMMM YYYY'),
+                'tindak_lanjut'=>$monev->tindak_lanjut
+            ];
+            }
+            $template = new TemplateProcessor(public_path('/template/template_tl.docx'));
+            $tanggalRead = Carbon::parse($report->close_date)->isoFormat('DD MMMM YYYY');
         }
+        
 
-        $template = new TemplateProcessor(public_path('/template/template.docx'));
-
+       
 
         $ketua=Pejabat::where('jabatan_id',1)->first();
         $wakil_ketua=Pejabat::where('jabatan_id',2)->first();
         if(!$ketua||!$wakil_ketua){
             return back()->with('fail','Atur pejabat terlebih dahulu!');
         }
-        $tanggalRead = Carbon::parse($report->report_date)->isoFormat('DD MMMM YYYY');
+       
 
         $template->setValue('title', $report->report_name);
         $template->setValue('tanggal_laporan', $tanggalRead);

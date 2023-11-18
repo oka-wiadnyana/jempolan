@@ -41,7 +41,7 @@
     <livewire:modal-upload />
     <livewire:modal-add-laporan-semester />
     <livewire:modal-edit-laporan-semester />
-    
+    <livewire:modal-download-laporan />
     @push('foot')
         <script>
             $(function() {
@@ -98,6 +98,9 @@
           
             function showModalUpload(id,periode){
                 Livewire.dispatch('show-modal-upload',{'id':id,'periode':periode});
+            }
+            function showModalDownload(id){
+                Livewire.dispatch('show-modal-download-laporan',{'id':id,'periode':'semester'});
             }
 
             function deleteLaporan(id){
