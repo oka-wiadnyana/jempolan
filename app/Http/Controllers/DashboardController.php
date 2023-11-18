@@ -24,9 +24,9 @@ class DashboardController extends Controller
             if($level->level_name=='super_admin' || $level->level_name=='admin'){
                 continue;
             }
-            $jmlLaporanMingguan[]=$this->getJmlLaporan($level->level_name,'weekly_report');
-            $jmlLaporanBulanan[]=$this->getJmlLaporan($level->level_name,'monthly_report');
-            $jmlLaporanTriwulan[]=$this->getJmlLaporan($level->level_name,'quarterly_report');
+            $jmlLaporanMingguan[]=$this->getJmlLaporan($level->id,'weekly_report');
+            $jmlLaporanBulanan[]=$this->getJmlLaporan($level->id,'monthly_report');
+            $jmlLaporanTriwulan[]=$this->getJmlLaporan($level->id,'quarterly_report');
             $unit[]=$level->level_name;
         }
 
@@ -42,7 +42,7 @@ class DashboardController extends Controller
     }
 
     public function getJmlLaporan($unit,$table_report){
-        $jml=DB::table($table_report.' as a')->join('report_ref as b','a.report_id','=','b.id')->join('level as c','b.level_id','=','c.id')->where('level_name',$unit)->count();
+        $jml=DB::table($table_report.' as a')->where('level_id',$unit)->count();
 
         return $jml;
     }

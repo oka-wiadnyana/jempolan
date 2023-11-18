@@ -78,7 +78,7 @@
                                 <span class="hide-menu"> Triwulan </span>
                             </a>
                         </li>
-                        {{-- <li class="sidebar-item">
+                        <li class="sidebar-item">
                             <a href="{{ url('report/semester/perdata') }}" class="sidebar-link">
                                 <i class="mdi mdi-comment-processing-outline"></i>
                                 <span class="hide-menu"> Semester </span>
@@ -89,7 +89,8 @@
                                 <i class="mdi mdi-comment-processing-outline"></i>
                                 <span class="hide-menu"> Tahunan </span>
                             </a>
-                        </li> --}}
+                        </li>
+                      
                     </ul>
                 </li>
                 @endif
@@ -114,24 +115,7 @@
                                 <span class="hide-menu"> Bulanan </span>
                             </a>
                         </li>
-                        {{-- <li class="sidebar-item">
-                            <a href="{{ url('report/triwulan/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Triwulan </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ url('report/semester/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Semester </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ url('report/tahunan/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Tahunan </span>
-                            </a>
-                        </li> --}}
+                        
                     </ul>
                 </li>
                 @endif
@@ -143,36 +127,14 @@
                         <span class="hide-menu">PTIP </span>
                     </a>
                     <ul aria-expanded="false" class="collapse  first-level">
-                        {{-- <li class="sidebar-item">
-                            <a href="{{ url('report/mingguan/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Mingguan </span>
-                            </a>
-                        </li> --}}
+                       
                         <li class="sidebar-item">
                             <a href="{{ url('report/bulanan/ptip') }}" class="sidebar-link">
                                 <i class="mdi mdi-comment-processing-outline"></i>
                                 <span class="hide-menu"> Bulanan </span>
                             </a>
                         </li>
-                        {{-- <li class="sidebar-item">
-                            <a href="{{ url('report/triwulan/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Triwulan </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ url('report/semester/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Semester </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ url('report/tahunan/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Tahunan </span>
-                            </a>
-                        </li> --}}
+                        
                     </ul>
                 </li>
                 @endif
@@ -184,36 +146,14 @@
                         <span class="hide-menu">Kepegawaian & Ortala </span>
                     </a>
                     <ul aria-expanded="false" class="collapse  first-level">
-                        {{-- <li class="sidebar-item">
-                            <a href="{{ url('report/mingguan/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Mingguan </span>
-                            </a>
-                        </li> --}}
+                       
                         <li class="sidebar-item">
                             <a href="{{ url('report/bulanan/kepeg_ortala') }}" class="sidebar-link">
                                 <i class="mdi mdi-comment-processing-outline"></i>
                                 <span class="hide-menu"> Bulanan </span>
                             </a>
                         </li>
-                        {{-- <li class="sidebar-item">
-                            <a href="{{ url('report/triwulan/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Triwulan </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ url('report/semester/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Semester </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ url('report/tahunan/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Tahunan </span>
-                            </a>
-                        </li> --}}
+                      
                     </ul>
                 </li>
                 @endif
@@ -225,36 +165,14 @@
                         <span class="hide-menu">Umum & Keuangan </span>
                     </a>
                     <ul aria-expanded="false" class="collapse  first-level">
-                        {{-- <li class="sidebar-item">
-                            <a href="{{ url('report/mingguan/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Mingguan </span>
-                            </a>
-                        </li> --}}
+                       
                         <li class="sidebar-item">
                             <a href="{{ url('report/bulanan/umum_keu') }}" class="sidebar-link">
                                 <i class="mdi mdi-comment-processing-outline"></i>
                                 <span class="hide-menu"> Bulanan </span>
                             </a>
                         </li>
-                        {{-- <li class="sidebar-item">
-                            <a href="{{ url('report/triwulan/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Triwulan </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ url('report/semester/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Semester </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ url('report/tahunan/pidana') }}" class="sidebar-link">
-                                <i class="mdi mdi-comment-processing-outline"></i>
-                                <span class="hide-menu"> Tahunan </span>
-                            </a>
-                        </li> --}}
+                       
                     </ul>
                 </li>
                 @endif
@@ -272,9 +190,54 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
+                        <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                                <i class="icon-Sunglasses-Smiley"></i>
+                                <span class="hide-menu">Ref. Object </span>
+                            </a>
+                        <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item">
+                                    <a href="{{ url('ref/object_monev/mingguan') }}" class="sidebar-link">
+                                        <i class="mdi mdi-comment-processing-outline"></i>
+                                        <span class="hide-menu"> Mingguan </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ url('ref/object_monev/bulanan') }}" class="sidebar-link">
+                                        <i class="mdi mdi-comment-processing-outline"></i>
+                                        <span class="hide-menu"> Bulanan </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ url('ref/object_monev/triwulan') }}" class="sidebar-link">
+                                        <i class="mdi mdi-comment-processing-outline"></i>
+                                        <span class="hide-menu"> Triwulan </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ url('ref/object_monev/semester') }}" class="sidebar-link">
+                                        <i class="mdi mdi-comment-processing-outline"></i>
+                                        <span class="hide-menu"> Semester </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ url('ref/object_monev/tahunan') }}" class="sidebar-link">
+                                        <i class="mdi mdi-comment-processing-outline"></i>
+                                        <span class="hide-menu"> Tahunan </span>
+                                    </a>
+                                </li>
+                                
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
                         <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('daftar_akun') }}" aria-expanded="false">
                             <i class="icon-User"></i>
                             <span class="hide-menu">Akun</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('daftar_pejabat') }}" aria-expanded="false">
+                            <i class="icon-Line-Chart3"></i>
+                            <span class="hide-menu">Pejabat</span>
                         </a>
                     </li>
                   

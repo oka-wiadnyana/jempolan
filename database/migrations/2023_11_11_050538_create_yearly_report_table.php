@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('yearly_report', function (Blueprint $table) {
             $table->id();
-            $table->integer('report_id');
-            $table->text('objek_monitoring')->nullable();
-            $table->text('hasil_evaluasi')->nullable();
-            $table->text('rekomendasi')->nullable();
-            $table->text('tindak_lanjut')->nullable();
+            $table->text('report_name');
             $table->date('report_date');
-            $table->string('year',255);
-            $table->text('file');
+            $table->integer('level_id');
+         
+            $table->string('year');
+            $table->text('file')->nullable();
             $table->timestamps();
         });
     }

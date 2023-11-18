@@ -28,11 +28,10 @@
                         <label for="">Periode</label>
                         <select name="periode" id="" class="form-control">
                             <option value="" selected disabled>Pilih</option>
-                            <option value="mingguan" @selected($report?->periode=='mingguan')>Mingguan</option>
-                            <option value="bulanan" @selected($report?->periode=='bulanan')>Bulanan</option>
-                            <option value="triwulan" @selected($report?->periode=='triwulan')>Triwulan</option>
-                            <option value="semester" @selected($report?->periode=='semester')>Semester</option>
-                            <option value="tahunan" @selected($report?->periode=='tahunan')>Tahunan</option>
+                            @foreach ($periodes as $periode)
+                            <option value="{{ $periode->id }}" @selected($report?->periode==$periode->id)>{{ $periode->periode_name }}</option>
+                            @endforeach
+                          
                         </select>
                     </div>
                     <div class="form-group">

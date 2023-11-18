@@ -28,11 +28,10 @@
                         <label for="">Periode</label>
                         <select name="periode" id="" class="form-control">
                             <option value="" selected disabled>Pilih</option>
-                            <option value="mingguan">Mingguan</option>
-                            <option value="bulanan">Bulanan</option>
-                            <option value="triwulan">Triwulan</option>
-                            <option value="semester">Semester</option>
-                            <option value="tahunan">Tahunan</option>
+                            @foreach ($periodes as $periode)
+                            <option value="{{ $periode->id }}">{{ ucwords($periode->periode_name) }}</option> 
+                            @endforeach
+                         
                         </select>
                     </div>
                     <div class="form-group">

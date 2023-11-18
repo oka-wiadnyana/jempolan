@@ -21,47 +21,31 @@
                    <form action="{{ url('report/edit_laporan_triwulan') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
+                        
                         <label for="">Nama Laporan</label>
-                        <select name="report_id" id="" class="form-control">
+                        <select name="report_name" id="" class="form-control">
                             <option value="" selected disabled>Pilih</option>
                             @foreach ($report_refs as $report_ref)
-                            <option value="{{ $report_ref->id }}"  @selected($report_ref->id==$report_data?->report_id)>{{ $report_ref->report_name }}</option>
+                            <option value="{{ $report_ref->report_name }}"  @selected($report_ref->report_name==$report_data?->report_name)>{{ $report_ref->report_name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="">Obj. Monitoring</label>
-                        <textarea name="objek_monitoring" id="" cols="30" rows="5"  class="form-control" >{{ $report_data?->objek_monitoring }}</textarea>
-                       
-                    </div>
-                    <div class="form-group">
                         <label for="">Tgl Laporan</label>
                        <input type="date" name="report_date" id="" class="form-control" value="{{ $report_data?->report_date }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Hasil Evaluasi</label>
-                        <textarea name="hasil_evaluasi" id="" cols="30" rows="5" class="form-control" >{{ $report_data?->hasil_evaluasi }}</textarea>
-                       
-                    </div>
-                    <div class="form-group">
-                        <label for="">Rekomendasi</label>
-                        <textarea name="rekomendasi" id="" cols="30" rows="5" class="form-control" >{{ $report_data?->rekomendasi }}</textarea>
-                       
-                    </div>
-                    <div class="form-group">
-                        <label for="">Tindak Lanjut</label>
-                        <textarea name="tindak_lanjut" id="" cols="30" rows="5" class="form-control" >{{ $report_data?->tindak_lanjut }}</textarea>
-                       
                     </div>
                     
                     <div class="form-group">
                         <label for="">Triwulan</label>
                         <select name="quarter" id="" class="form-control">
                             <option value="" selected disabled>Pilih</option>
-                           <option value="I" @selected($report_data?->quarter=='I')>I</option>
-                           <option value="II" @selected($report_data?->quarter=='II')>II</option>
-                           <option value="III" @selected($report_data?->quarter=='III')>III</option>
-                           <option value="IV" @selected($report_data?->quarter=='IV')>IV</option>
+                          
+                          
+                            <option value="I" @selected($report_data?->quarter=="I")>I</option>
+                            <option value="II" @selected($report_data?->quarter=="II")>II</option>
+                            <option value="III" @selected($report_data?->quarter=="III")>III</option>
+                            <option value="IV" @selected($report_data?->quarter=="IV")>IV</option>
+                           
                             
                         </select>
                     </div>
@@ -76,14 +60,12 @@
                             
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="">File</label>
-                        <input type="file" name="file" id="" class="form-control">
-                    </div>
+                    
+                   
+                    <input type="hidden" name="id" value="{{ $report_data?->id }}">
+                    <input type="hidden" name="level_id" value="{{ $report_data?->level_id }}">
                     <button class=" btn btn-primary" type="submit">Simpan</button>
                     <button class=" btn btn-secondary" type="button" wire:click.prevent="closeModal()">Tutup</button>
-                    <input type="hidden" name="file_lama" value="{{ $report_data?->file }}">
-                    <input type="hidden" name="id" value="{{ $report_data?->id }}">
                    </form>
                    
  

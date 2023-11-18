@@ -15,4 +15,7 @@ class ReportRef extends Model
     public function levelName():HasOne{
         return $this->hasOne(Level::class,'id','level_id');
     }
+    public function periodeName():HasOne{
+        return $this->hasOne(Periode::class,'id','periode');
+    }
 }

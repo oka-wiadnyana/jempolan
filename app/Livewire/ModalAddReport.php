@@ -33,6 +33,8 @@ class ModalAddReport extends Component
     public function render()
     {
         $levels=DB::table('level')->get();
-        return view('livewire.modal-add-report',['levels'=>$levels]);
+        $periodes=DB::table('periode_ref')->get();
+
+        return view('livewire.modal-add-report',['levels'=>$levels,'periodes'=>$periodes]);
     }
 }

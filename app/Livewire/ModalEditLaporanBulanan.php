@@ -13,7 +13,7 @@ class ModalEditLaporanBulanan extends Component
 {
     use Common;
     public $show = false;
-    public $id;
+    public $id='';
     public $data;
  
     #[On('show-modal-edit-laporan-bulanan')]
@@ -34,9 +34,11 @@ class ModalEditLaporanBulanan extends Component
  
     public function render()
     {
-        $id=$this->id;
-        $report_data=MonthlyReport::with(['reportName'])->where('id',$id)->first();
-        $report_refs=DB::table('report_ref')->where('level_id',$report_data?->reportName?->level_id)->where('periode','bulanan')->get();
+       
+        $report_data=MonthlyReport::where('id',$this->id)->first();
+        
+        $report_refs=DB::table('report_ref')->where('level_id',$report_data?->level_id)->where('periode',2)->get();
+        // dd($report_data,$report_refs);
         return view('livewire.modal-edit-laporan-bulanan',['report_data'=>$report_data,'report_refs'=>$report_refs,'months'=>$this->getMonthNames(),'years'=>$this->getYearArray()]);
     }
 }

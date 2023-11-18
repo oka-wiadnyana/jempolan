@@ -18,7 +18,7 @@
             axios.get('/get_data_chart')
             .then(function (response) {
                 // handle success
-               
+               console.log(response.data)
                 const data = {
                     labels: response.data.unit,
                     datasets: [{

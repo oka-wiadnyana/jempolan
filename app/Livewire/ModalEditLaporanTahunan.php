@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Models\MonthlyReport;
 use App\Models\QuarterlyReport;
-use App\Models\SemesterReport;
 use App\Models\WeeklyReport;
 use App\Models\YearlyReport;
 use App\Traits\Common;
@@ -16,7 +15,7 @@ class ModalEditLaporanTahunan extends Component
 {
     use Common;
     public $show = false;
-    public $id;
+    public $id='';
     public $data;
  
     #[On('show-modal-edit-laporan-tahunan')]
@@ -37,9 +36,12 @@ class ModalEditLaporanTahunan extends Component
  
     public function render()
     {
-        $id=$this->id;
-        $report_data=YearlyReport::with(['reportName'])->where('id',$id)->first();
-        $report_refs=DB::table('report_ref')->where('level_id',$report_data?->reportName?->level_id)->where('periode','tahunan')->get();
+       
+        $report_data=YearlyReport::where('id',$this->id)->first();
+        
+        $report_refs=DB::table('report_ref')->where('level_id',$report_data?->level_id)->where('periode',5)->get();
+        // dd($report_data);
+        // dd($report_data,$report_refs);
         return view('livewire.modal-edit-laporan-tahunan',['report_data'=>$report_data,'report_refs'=>$report_refs,'years'=>$this->getYearArray()]);
     }
 }

@@ -22,10 +22,10 @@
                     @csrf
                     <div class="form-group">
                         <label for="">Nama Laporan</label>
-                        <select name="report_id" id="" class="form-control">
+                        <select name="report_name" id="" class="form-control">
                             <option value="" selected disabled>Pilih</option>
                             @foreach ($report_refs as $report_ref)
-                            <option value="{{ $report_ref->id }}"  >{{ $report_ref->report_name }}</option>
+                            <option value="{{ $report_ref->report_name }}"  >{{ $report_ref->report_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -33,23 +33,7 @@
                         <label for="">Tgl Laporan</label>
                        <input type="date" name="report_date" id="" class="form-control">
                     </div>
-                    <div class="form-group">
-                        <label for="">Obj. Monitoring</label>
-                       <textarea name="objek_monitoring" id="" cols="30" rows="5" class="form-control"></textarea>
-                    </div>
-                 
-                    <div class="form-group">
-                        <label for="">Hasil Evaluasi</label>
-                       <textarea name="hasil_evaluasi" id="" cols="30" rows="5" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Rekomendasi</label>
-                       <textarea name="rekomendasi" id="" cols="30" rows="5" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Tindak Lanjut</label>
-                       <textarea name="tindak_lanjut" id="" cols="30" rows="5" class="form-control"></textarea>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="">Bulan</label>
                         <select name="month" id="" class="form-control">
@@ -72,13 +56,14 @@
                             
                         </select>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="">File</label>
                         <input type="file" name="file" id="" class="form-control">
-                    </div>
+                    </div> --}}
                     <button class=" btn btn-primary" type="submit">Simpan</button>
                     <button class=" btn btn-secondary" type="button" wire:click.prevent="closeModal()">Tutup</button>
-                    <input type="hidden" name="level_id" value="{{ $unit }}">
+                    <input type="hidden" name="level_id" value="{{ $level_id }}">
+                    <input type="hidden" name="periode_id" value="{{ $periode_id }}">
                    </form>
                    
  

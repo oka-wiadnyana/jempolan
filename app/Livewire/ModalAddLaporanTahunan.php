@@ -11,14 +11,14 @@ class ModalAddLaporanTahunan extends Component
 {
     use Common;
     public $show = false;
-    public $unit;
+    public $level_id;
     public $data;
  
     #[On('show-modal-tambah-laporan-tahunan')]
     public function showModal($unit)
     {
        
-        $this->unit=$unit;
+        $this->level_id=$unit;
         $this->show = true;
       
     }
@@ -34,8 +34,11 @@ class ModalAddLaporanTahunan extends Component
     public function render()
     {
         
-        $report_refs=DB::table('report_ref')->where('level_id',$this->unit)->where('periode','tahunan')->get();
+        $report_refs=DB::table('report_ref')->where('level_id',$this->level_id)->where('periode',5)->get();
+        
+
         // $months=getMonthNames();
-        return view('livewire.modal-add-laporan-tahunan',['unit'=>$this->unit,'report_refs'=>$report_refs,'years'=>$this->getYearArray()]);
+        return view('livewire.modal-add-laporan-tahunan',['level_id'=>$this->level_id,'report_refs'=>$report_refs,'periode_id'=>5,'years'=>$this->getYearArray()]);
     }
 }
+

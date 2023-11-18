@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('weekly_report', function (Blueprint $table) {
             $table->id();
-            $table->integer('report_id');
+            $table->text('report_name');
             $table->date('report_date');
-            $table->string('week',255);
-            $table->string('month',255);
-            $table->string('year',255);
-            $table->text('file');
+            $table->integer('level_id');
+            
+            $table->string('week');
+            $table->string('month');
+            $table->string('year');
+            $table->text('file')->nullable();
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ class ModalEditLaporanSemester extends Component
 {
     use Common;
     public $show = false;
-    public $id;
+    public $id='';
     public $data;
  
     #[On('show-modal-edit-laporan-semester')]
@@ -36,9 +36,12 @@ class ModalEditLaporanSemester extends Component
  
     public function render()
     {
-        $id=$this->id;
-        $report_data=SemesterReport::with(['reportName'])->where('id',$id)->first();
-        $report_refs=DB::table('report_ref')->where('level_id',$report_data?->reportName?->level_id)->where('periode','semester')->get();
+       
+        $report_data=SemesterReport::where('id',$this->id)->first();
+        
+        $report_refs=DB::table('report_ref')->where('level_id',$report_data?->level_id)->where('periode',4)->get();
+        // dd($report_data);
+        // dd($report_data,$report_refs);
         return view('livewire.modal-edit-laporan-semester',['report_data'=>$report_data,'report_refs'=>$report_refs,'years'=>$this->getYearArray()]);
     }
 }

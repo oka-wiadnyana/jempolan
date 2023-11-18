@@ -1,0 +1,76 @@
+<div>
+ 
+    <div class="modal fade @if($show === true) show @endif " id="myExampleModal" style="display: @if($show === true)
+                 block
+         @else
+                 none
+         @endif;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content rounded-3">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Object Monev {{ ucwords($periode) }}</h5>
+                    <button class="close" type="button" aria-label="Close" wire:click.prevent="closeModal()">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    {{-- <button type="button" class="btn-close" aria-label="Close"
+                        wire:click.prevent="closeModal()"></button> --}}
+                </div>
+ 
+                <div class="modal-body">
+                   <form action="{{ url('ref/add_object/'.$periode) }}" method="POST" >
+                    @csrf
+                        <div x-data="{open:false}">
+                            <div class="form-group">
+                                <label for="">Unit</label>
+                                <select name="periode" id="" class="form-control" wire:model.live='unit' x-on:change="open = true">
+                                    <option value="" selected disabled>Pilih</option>
+                                    @foreach ($levels as $level)
+                                    @php 
+                                    if($level->level_name=='super_admin'||$level->level_name=='admin'){
+                                        continue;
+                                    }
+                                    @endphp
+                                    <option value="{{ $level->id }}">{{ ucwords($level->level_name) }}</option> 
+                                    @endforeach
+                                
+                                </select>
+                            </div>
+                                
+                            <div x-show="open" class="form-group">
+                                <div>
+                                    <label for="">Laporan</label>
+                                    <select name="report_id" id="" class="form-control">
+                                        @if ($reports)
+                                            @foreach ($reports as $report)
+                                            <option value="{{ $report->id }}">{{ $report->report_name }}</option>
+                                            @endforeach
+                                        @endif
+                                       
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="">Object</label>
+                                    <input type="text"  class="form-control" name="object_name">
+                                </div>
+                            </div>
+                            
+                            <button class=" btn btn-primary" type="submit">Simpan</button>
+                            <button class=" btn btn-secondary" type="button" wire:click.prevent="closeModal()">Tutup</button>
+                        </div>
+                        
+                   </form>
+                   
+ 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Let's also add the backdrop / overlay here -->
+    <div class="modal-backdrop fade show" id="backdrop" style="display: @if($show === true)
+                 block
+         @else
+                 none
+         @endif;"></div>
+ 
+</div>

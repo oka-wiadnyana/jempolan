@@ -14,7 +14,7 @@ class ModalEditLaporanTriwulan extends Component
 {
     use Common;
     public $show = false;
-    public $id;
+    public $id='';
     public $data;
  
     #[On('show-modal-edit-laporan-triwulan')]
@@ -35,9 +35,12 @@ class ModalEditLaporanTriwulan extends Component
  
     public function render()
     {
-        $id=$this->id;
-        $report_data=QuarterlyReport::with(['reportName'])->where('id',$id)->first();
-        $report_refs=DB::table('report_ref')->where('level_id',$report_data?->reportName?->level_id)->where('periode','triwulan')->get();
+       
+        $report_data=QuarterlyReport::where('id',$this->id)->first();
+        
+        $report_refs=DB::table('report_ref')->where('level_id',$report_data?->level_id)->where('periode',3)->get();
+        // dd($report_data);
+        // dd($report_data,$report_refs);
         return view('livewire.modal-edit-laporan-triwulan',['report_data'=>$report_data,'report_refs'=>$report_refs,'years'=>$this->getYearArray()]);
     }
 }

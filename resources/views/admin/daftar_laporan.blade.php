@@ -55,8 +55,8 @@
                             name: 'report_name'
                         },
                         {
-                            data: 'periode',
-                            name: 'periode'
+                            data: 'periode_name',
+                            name: 'periode_name'
                         },
                         {
                             data: 'level_name',

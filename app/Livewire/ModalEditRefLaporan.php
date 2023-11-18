@@ -34,8 +34,9 @@ class ModalEditRefLaporan extends Component
     public function render()
     {
         $levels=DB::table('level')->get();
+        $periodes=DB::table('periode_ref')->get();
         $report=ReportRef::find($this->id);
      
-        return view('livewire.modal-edit-ref-laporan',['report'=>$report,'levels'=>$levels]);
+        return view('livewire.modal-edit-ref-laporan',['report'=>$report,'levels'=>$levels,'periodes'=>$periodes]);
     }
 }
