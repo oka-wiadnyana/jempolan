@@ -260,7 +260,9 @@ class MonthlyReportController extends Controller
 
         $ketua=Pejabat::where('jabatan_id',1)->first();
         $wakil_ketua=Pejabat::where('jabatan_id',2)->first();
-        
+        if(!$ketua||!$wakil_ketua){
+            return back()->with('fail','Atur pejabat terlebih dahulu!');
+        }
         $tanggalRead = Carbon::parse($report->report_date)->isoFormat('DD MMMM YYYY');
 
         $template->setValue('title', $report->report_name);
