@@ -21,12 +21,41 @@
                    <form action="{{ url('/download_monev_'.$periode) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                    
+                    <div x-data="{jenis:''}">
+
+                      <div class="form-group">
+                          <label for="">Jenis Laporan</label>
+                        <select name="jenis_laporan" id="" class="form-control"   x-model="jenis">
+                          <option value="" selected disabled>Pilih</option>
+                         <option value="monev">Monev</option>
+                         <option value="tl">TL</option>
+                        </select>
+                      </div>
+                      <div class="form-group" x-show="jenis=='tl'">
+                        <label for="">Tanggal TL</label>
+                        <input type="date" name="tanggal_tl" id="" class="form-control">
+                    </div>
+                    </div>
                     <div class="form-group">
-                        <label for="">Jenis Laporan</label>
-                      <select name="jenis_laporan" id="" class="form-control">
+                        <label for="">PIC</label>
+                      <select name="pic" id="" class="form-control">
                         <option value="" selected disabled>Pilih</option>
-                       <option value="monev">Monev</option>
-                       <option value="tl">TL</option>
+                        @foreach ($pejabats as $pejabat)
+                            
+                        <option value="{{ $pejabat->id }}">{{ $pejabat->nama }}</option>
+                        @endforeach
+                       
+                      </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Mengetahui</label>
+                      <select name="mengetahui" id="" class="form-control">
+                        <option value="" selected disabled>Pilih</option>
+                        @foreach ($pejabats as $pejabat)
+                            
+                        <option value="{{ $pejabat->id }}">{{ $pejabat->nama }}</option>
+                        @endforeach
+                       
                       </select>
                     </div>
                     <input type="hidden" name="id" value="{{ $id }}">

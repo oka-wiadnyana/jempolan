@@ -24,10 +24,21 @@ class JabatanSeeder extends Seeder
             ['nama_jabatan'=>'Kepala Sub Bagian Umum dan Keuangan'],
             ['nama_jabatan'=>'Kepala Sub Bagian PTIP'],
             ['nama_jabatan'=>'Kepala Sub Bagian Kepegawaian dan Ortala'],
+            ['nama_jabatan'=>'Hakim Pegawas Kepaniteraan Perdata'],
+            ['nama_jabatan'=>'Hakim Pegawas Kepaniteraan Pidana'],
+            ['nama_jabatan'=>'Hakim Pegawas Kepaniteraan Hukum'],
+            ['nama_jabatan'=>'Hakim Pegawas Sub Bagian Umum dan Keuangan'],
+            ['nama_jabatan'=>'Hakim Pegawas Sub PTIP'],
+            ['nama_jabatan'=>'Hakim Pegawas Sub Kepegawaian dan Ortala'],
             
             ];
 
+          
         foreach($jabatans as $jabatan){
+            $exist=DB::table('ref_jabatan')->where('nama_jabatan',$jabatan['nama_jabatan'])->first();
+            if($exist){
+                continue;
+            }
             DB::table('ref_jabatan')->insert([
                 'nama_jabatan' => $jabatan['nama_jabatan'],
                               

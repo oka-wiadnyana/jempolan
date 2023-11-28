@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Level;
+use App\Models\Pejabat;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -38,7 +39,8 @@ class ModalDownloadLaporan extends Component
     {
         
         $levels=Level::all();
+        $pejabats=Pejabat::all();
         // $months=getMonthNames();
-        return view('livewire.modal-download-laporan',['id'=>$this->id,'periode'=>$this->periode]);
+        return view('livewire.modal-download-laporan',['id'=>$this->id,'periode'=>$this->periode,'pejabats'=>$pejabats]);
     }
 }

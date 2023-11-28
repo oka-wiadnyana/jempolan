@@ -247,7 +247,10 @@ class SemesterReportController extends Controller
         $validate=Validator::make(
             $request->all(),
             [
-                'jenis_laporan'=>'required'
+                'jenis_laporan'=>'required',
+                'tanggal_tl'=>'required_if:jenis_laporan,tl',
+                'pic'=>'required',
+                'mengetahui'=>'required',
             ]
             );
         
@@ -263,41 +266,46 @@ class SemesterReportController extends Controller
 
         if($request->jenis_laporan=='monev'){
             foreach($monevs as $monev){
-                $data_template[]=['no'=>$no++,'objek_monitoring'=>$monev->object_name, 'kesesuaian'=>$monev->kesesuaian,'ketidaksesuaian'=>$monev->ketidaksesuaian,'tindakan_perbaikan'=>$monev->tindakan_perbaikan,'penanggung_jawab'=>$monev->penanggung_jawab,'close_date'=>Carbon::parse($monev->close_date)->isoFormat('DD MMMM YYYY')];
+                $data_template[]=['no'=>$no++,'objek_monitoring'=>$monev->object_name, 'kesesuaian'=>$monev->kesesuaian,'ketidaksesuaian'=>$monev->ketidaksesuaian,'tindakan_perbaikan'=>$monev->tindakan_perbaikan,'penanggung_jawab'=>$monev->penanggung_jawab,'close_date'=>$monev->close_date?Carbon::parse($monev->close_date)->isoFormat('DD MMMM YYYY'):"-"
+            
+            ];
             }
             $template = new TemplateProcessor(public_path('/template/template.docx'));
             $tanggalRead = Carbon::parse($report->report_date)->isoFormat('DD MMMM YYYY');
         }elseif($request->jenis_laporan=='tl'){
             foreach($monevs as $monev){
-                $data_template[]=['no'=>$no++,'objek_monitoring'=>$monev->object_name, 'kesesuaian'=>$monev->kesesuaian,'ketidaksesuaian'=>$monev->ketidaksesuaian,'tindakan_perbaikan'=>$monev->tindakan_perbaikan,'penanggung_jawab'=>$monev->penanggung_jawab,'close_date'=>Carbon::parse($monev->close_date)->isoFormat('DD MMMM YYYY'),
+                $data_template[]=['no'=>$no++,'objek_monitoring'=>$monev->object_name, 'kesesuaian'=>$monev->kesesuaian,'ketidaksesuaian'=>$monev->ketidaksesuaian,'tindakan_perbaikan'=>$monev->tindakan_perbaikan,'penanggung_jawab'=>$monev->penanggung_jawab,'close_date'=>$monev->close_date?Carbon::parse($monev->close_date)->isoFormat('DD MMMM YYYY'):"-",
                 'tindak_lanjut'=>$monev->tindak_lanjut
             ];
             }
             $template = new TemplateProcessor(public_path('/template/template_tl.docx'));
-            $tanggalRead = Carbon::parse($report->close_date)->isoFormat('DD MMMM YYYY');
+            $tanggalRead = Carbon::parse($request->tanggal_tl)->isoFormat('DD MMMM YYYY');
         }
         
 
        
 
-        $ketua=Pejabat::where('jabatan_id',1)->first();
-        $wakil_ketua=Pejabat::where('jabatan_id',2)->first();
-        if(!$ketua||!$wakil_ketua){
+        $pic=Pejabat::where('id',$request->pic)->first();
+        $mengetahui=Pejabat::where('id',$request->mengetahui)->first();
+        
+        if(!$pic||!$mengetahui){
             return back()->with('fail','Atur pejabat terlebih dahulu!');
         }
        
 
         $template->setValue('title', $report->report_name);
         $template->setValue('tanggal_laporan', $tanggalRead);
-        $template->setValue('nama_ketua', $ketua->nama);
-        $template->setValue('nama_wakil_ketua', $wakil_ketua->nama);
+        $template->setValue('jabatan_mengetahui', $mengetahui->jabatanName->nama_jabatan);
+        $template->setValue('mengetahui', $mengetahui->nama);
+        $template->setValue('jabatan_pic', $pic->jabatanName->nama_jabatan);
+        $template->setValue('pic', $pic->nama);
 
         $template->cloneRowAndSetValues('no', $data_template);
 
 
 
 
-        header("Content-Disposition: attachment; filename=Form-Laporan-Semester-" . time() . ".docx");
+        header("Content-Disposition: attachment; filename=Form-Laporan-Semester-".$request->jenis_laporan."-" . time() . ".docx");
         $pathToSave = 'php://output';
         $template->saveAs($pathToSave);
         return;
