@@ -67,7 +67,7 @@ class YearlyReportController extends Controller
                 ->addColumn('file_download', function($row){
                     if($row->file){
 
-                        return '<a href="'.asset('yearly_file/'.$row->file).'" class="file btn btn-primary btn-sm" target="_blank">Download</a>';
+                        return '<a href="" class="upload btn btn-warning btn-sm" onclick="showModalUpload('.$row->id.',\'tahunan\'); return false">Evidence</a> <a href="'.asset('yearly_file/'.$row->file).'" class="file btn btn-primary btn-sm" target="_blank">Download</a>';
                     }else {
                         if(auth()->user()->level->level_name!='admin'){
                         return '<a href="" class="upload btn btn-warning btn-sm" onclick="showModalUpload('.$row->id.',\'tahunan\'); return false">Upload</a>';
@@ -296,8 +296,10 @@ class YearlyReportController extends Controller
         $template->setValue('tanggal_laporan', $tanggalRead);
         $template->setValue('jabatan_mengetahui', $mengetahui->jabatanName->nama_jabatan);
         $template->setValue('mengetahui', $mengetahui->nama);
+        $template->setValue('mengetahui_nip', $mengetahui->nip);
         $template->setValue('jabatan_pic', $pic->jabatanName->nama_jabatan);
         $template->setValue('pic', $pic->nama);
+        $template->setValue('pic_nip', $pic->nip);
 
 
         $template->cloneRowAndSetValues('no', $data_template);
@@ -351,7 +353,7 @@ class YearlyReportController extends Controller
             
        
       
-        return redirect()->to(url('report/tahunan/perdata'))->with('success','Data berhasil disimpan');
+        return redirect()->back()->with('success','Data berhasil disimpan');
         
 
 
@@ -383,7 +385,7 @@ class YearlyReportController extends Controller
             ],
         );
 
-        return redirect()->to(url('report/tahunan/perdata'))->with('success','File berhasil disimpan');
+        return redirect()->back()->with('success','File berhasil disimpan');
         
     }
 

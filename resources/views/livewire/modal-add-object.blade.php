@@ -20,44 +20,73 @@
                 <div class="modal-body">
                    <form action="{{ url('ref/add_object/'.$periode) }}" method="POST" >
                     @csrf
-                        <div x-data="{open:false}">
-                            <div class="form-group">
-                                <label for="">Unit</label>
-                                <select name="periode" id="" class="form-control" wire:model.live='unit' x-on:change="open = true">
-                                    <option value="" selected disabled>Pilih</option>
-                                    @foreach ($levels as $level)
-                                    @php 
-                                    if($level->level_name=='super_admin'||$level->level_name=='admin'){
-                                        continue;
-                                    }
-                                    @endphp
-                                    <option value="{{ $level->id }}">{{ ucwords($level->level_name) }}</option> 
-                                    @endforeach
-                                
+                    @if (!$levelName)
+                    <div x-data="{open:false}">
+                        <div class="form-group">
+                            <label for="">Unit</label>
+                            <select name="periode" id="" class="form-control" wire:model.live='unit' x-on:change="open = true">
+                                <option value="" selected disabled>Pilih</option>
+                                @foreach ($levels as $level)
+                                @php 
+                                if($level->level_name=='super_admin'||$level->level_name=='admin'){
+                                    continue;
+                                }
+                                @endphp
+                                <option value="{{ $level->id }}">{{ ucwords($level->level_name) }}</option> 
+                                @endforeach
+                            
+                            </select>
+                        </div>
+                            
+                        <div x-show="open" class="form-group">
+                            <div>
+                                <label for="">Laporan</label>
+                                <select name="report_id" id="" class="form-control">
+                                    @if ($reports)
+                                        @foreach ($reports as $report)
+                                        <option value="{{ $report->id }}">{{ $report->report_name }}</option>
+                                        @endforeach
+                                    @endif
+                                   
                                 </select>
                             </div>
-                                
-                            <div x-show="open" class="form-group">
-                                <div>
-                                    <label for="">Laporan</label>
-                                    <select name="report_id" id="" class="form-control">
-                                        @if ($reports)
-                                            @foreach ($reports as $report)
-                                            <option value="{{ $report->id }}">{{ $report->report_name }}</option>
-                                            @endforeach
-                                        @endif
-                                       
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="">Object</label>
-                                    <input type="text"  class="form-control" name="object_name">
-                                </div>
+                            <div>
+                                <label for="">Object</label>
+                                <input type="text"  class="form-control" name="object_name">
                             </div>
-                            
-                            <button class=" btn btn-primary" type="submit">Simpan</button>
-                            <button class=" btn btn-secondary" type="button" wire:click.prevent="closeModal()">Tutup</button>
                         </div>
+                        
+                        <button class=" btn btn-primary" type="submit">Simpan</button>
+                        <button class=" btn btn-secondary" type="button" wire:click.prevent="closeModal()">Tutup</button>
+                    </div>
+                    
+                    @endif
+                    @if ($levelName)
+                    <div >
+                        
+                        <div class="form-group">
+                            <div>
+                                <label for="">Laporan</label>
+                                <select name="report_id" id="" class="form-control">
+                                    @if ($reports)
+                                        @foreach ($reports as $report)
+                                        <option value="{{ $report->id }}">{{ $report->report_name }}</option>
+                                        @endforeach
+                                    @endif
+                                   
+                                </select>
+                            </div>
+                            <div>
+                                <label for="">Object</label>
+                                <input type="text"  class="form-control" name="object_name">
+                            </div>
+                        </div>
+                        
+                        <button class=" btn btn-primary" type="submit">Simpan</button>
+                        <button class=" btn btn-secondary" type="button" wire:click.prevent="closeModal()">Tutup</button>
+                    </div>
+                    
+                    @endif
                         
                    </form>
                    

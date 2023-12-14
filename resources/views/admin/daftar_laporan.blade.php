@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <button type="button" class="btn waves-effect waves-light btn-primary" onclick="showModalTambahLaporan(); return false">Tambah laporan</button>
+                            <button type="button" class="btn waves-effect waves-light btn-primary" onclick="showModalTambahLaporan('{{ $levelName }}'); return false">Tambah laporan</button>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -45,7 +45,7 @@
                 var table = $('#table').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: "{{ url('get_jenis_laporan') }}",
+                    ajax: "{{ url('get_jenis_laporan/'.$levelName??'') }}",
                     columns: [{
                             data: 'DT_RowIndex',
                             name: 'DT_RowIndex'
@@ -74,8 +74,8 @@
 
             });
 
-            function showModalTambahLaporan(){
-                Livewire.dispatch('show-modal-tambah-laporan');
+            function showModalTambahLaporan(levelName){
+                Livewire.dispatch('show-modal-tambah-laporan',{levelName});
             }
             function showModalEdit(id){
                 Livewire.dispatch('show-modal-edit-ref-laporan',{'id':id});

@@ -34,6 +34,7 @@
                          
                         </select>
                     </div>
+                    @if (!$levelId)
                     <div class="form-group">
                         <label for="">Bagian</label>
                         <select name="level_id" id="" class="form-control">
@@ -49,6 +50,12 @@
                             
                         </select>
                     </div>
+                    @endif
+
+                    @if ($levelId)
+                        <input type="hidden" name="level_id" value="{{ $levelId->id }}">
+                    @endif
+                   
                     <button class=" btn btn-primary" type="submit">Simpan</button>
                     <button class=" btn btn-secondary" type="button" wire:click.prevent="closeModal()">Tutup</button>
                    </form>

@@ -177,17 +177,28 @@
                 </li>
                 @endif
 
-                @if (auth()->user()->level->level_name=='super_admin')
+                
                 <li class="nav-small-cap">
                     <i class="mdi mdi-dots-horizontal"></i>
                     <span class="hide-menu">Ref</span>
                 </li>
                 <li class="sidebar-item">
                     <li class="sidebar-item">
+                        @if (Gate::allows('isSuperAdmin')||Gate::allows('isAdmin'))
                         <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('jenis_laporan') }}" aria-expanded="false">
                             <i class="icon-Line-Chart3"></i>
                             <span class="hide-menu">Jenis Laporan</span>
                         </a>
+                        @endif
+                        @if (!Gate::allows('isSuperAdmin')&&!Gate::allows('isAdmin'))
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('jenis_laporan/'.auth()->user()->level->level_name) }}" aria-expanded="false">
+                            <i class="icon-Line-Chart3"></i>
+                            <span class="hide-menu">Jenis Laporan</span>
+                        </a>
+                        @endif
+                        
+                  
+                       
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
@@ -195,39 +206,74 @@
                                 <span class="hide-menu">Ref. Object </span>
                             </a>
                         <ul aria-expanded="false" class="collapse  first-level">
+                            @if (!Gate::allows('isSuperAdmin')&&!Gate::allows('isAdmin'))
                                 <li class="sidebar-item">
-                                    <a href="{{ url('ref/object_monev/mingguan') }}" class="sidebar-link">
+                                    <a href="{{ url('ref/object_monev/mingguan/'.auth()->user()->level->level_name) }}" class="sidebar-link">
                                         <i class="mdi mdi-comment-processing-outline"></i>
                                         <span class="hide-menu"> Mingguan </span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="{{ url('ref/object_monev/bulanan') }}" class="sidebar-link">
+                                    <a href="{{ url('ref/object_monev/bulanan/'.auth()->user()->level->level_name) }}" class="sidebar-link">
                                         <i class="mdi mdi-comment-processing-outline"></i>
                                         <span class="hide-menu"> Bulanan </span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="{{ url('ref/object_monev/triwulan') }}" class="sidebar-link">
+                                    <a href="{{ url('ref/object_monev/triwulan/'.auth()->user()->level->level_name) }}" class="sidebar-link">
                                         <i class="mdi mdi-comment-processing-outline"></i>
                                         <span class="hide-menu"> Triwulan </span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="{{ url('ref/object_monev/semester') }}" class="sidebar-link">
+                                    <a href="{{ url('ref/object_monev/semester/'.auth()->user()->level->level_name) }}" class="sidebar-link">
                                         <i class="mdi mdi-comment-processing-outline"></i>
                                         <span class="hide-menu"> Semester </span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="{{ url('ref/object_monev/tahunan') }}" class="sidebar-link">
+                                    <a href="{{ url('ref/object_monev/tahunan/'.auth()->user()->level->level_name) }}" class="sidebar-link">
                                         <i class="mdi mdi-comment-processing-outline"></i>
                                         <span class="hide-menu"> Tahunan </span>
                                     </a>
                                 </li>
+                            @endif
+                            @if (Gate::allows('isSuperAdmin')||Gate::allows('isAdmin'))
+                            <li class="sidebar-item">
+                                <a href="{{ url('ref/object_monev/mingguan') }}" class="sidebar-link">
+                                    <i class="mdi mdi-comment-processing-outline"></i>
+                                    <span class="hide-menu"> Mingguan </span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{{ url('ref/object_monev/bulanan') }}" class="sidebar-link">
+                                    <i class="mdi mdi-comment-processing-outline"></i>
+                                    <span class="hide-menu"> Bulanan </span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{{ url('ref/object_monev/triwulan') }}" class="sidebar-link">
+                                    <i class="mdi mdi-comment-processing-outline"></i>
+                                    <span class="hide-menu"> Triwulan </span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{{ url('ref/object_monev/semester') }}" class="sidebar-link">
+                                    <i class="mdi mdi-comment-processing-outline"></i>
+                                    <span class="hide-menu"> Semester </span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{{ url('ref/object_monev/tahunan') }}" class="sidebar-link">
+                                    <i class="mdi mdi-comment-processing-outline"></i>
+                                    <span class="hide-menu"> Tahunan </span>
+                                </a>
+                            </li>
+                        @endif
                                 
                         </ul>
                     </li>
+                    @if (auth()->user()->level->level_name=='super_admin')
                     <li class="sidebar-item">
                         <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('daftar_akun') }}" aria-expanded="false">
                             <i class="icon-User"></i>

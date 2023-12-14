@@ -9,14 +9,17 @@ use Livewire\Component;
 class ModalAddReport extends Component
 {
     public $show = false;
+    public $levelName;
    
     public $data;
  
     #[On('show-modal-tambah-laporan')]
-    public function showModal()
+    public function showModal($levelName)
     {
  
         $this->show = true;
+        $this->levelName = $levelName;
+       
       
     }
  
@@ -34,7 +37,8 @@ class ModalAddReport extends Component
     {
         $levels=DB::table('level')->get();
         $periodes=DB::table('periode_ref')->get();
+        $levelId=DB::table('level')->where('level_name',$this->levelName)->first();
 
-        return view('livewire.modal-add-report',['levels'=>$levels,'periodes'=>$periodes]);
+        return view('livewire.modal-add-report',['levels'=>$levels,'periodes'=>$periodes,'levelId'=>$levelId]);
     }
 }

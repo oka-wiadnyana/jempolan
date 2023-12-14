@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Bagian</label>
-                        <select name="level_id" id="" class="form-control">
+                        <select name="level_id" id="" class="form-control" @disabled($report?->level_id==auth()->user()->level->id) >
                             <option value="" selected disabled>Pilih</option>
                             @foreach ($levels as $level)
                             @if ($level->level_name=='super_admin')
@@ -44,7 +44,7 @@
                                    continue;    
                                 @endphp
                             @endif
-                            <option value="{{ $level->id }}" @selected($report?->level_id==$level->id)>{{ $level->level_name }}</option>
+                            <option value="{{ $level->id }}" @selected($report?->level_id==$level->id) >{{ $level->level_name }}</option>
                             @endforeach
                             
                         </select>

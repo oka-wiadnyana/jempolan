@@ -60,13 +60,17 @@ Route::middleware('auth')->group(function(){
 
     Route::controller(RefController::class)->group(function () {
         Route::get('/jenis_laporan', 'jenisLaporan');
+        Route::get('/jenis_laporan/{levelName}', 'jenisLaporan');
         Route::get('/get_jenis_laporan', 'getJenisLaporan');
+        Route::get('/get_jenis_laporan/{levelName}', 'getJenisLaporan');
         Route::post('/ref/add_laporan', 'addLaporan');
         Route::post('/ref/edit_laporan', 'editLaporan');
         Route::post('/ref/delete_laporan', 'deleteLaporan');
         Route::get('ref/object_monev/{periode}', 'refObjectMonev');
+        Route::get('ref/object_monev/{periode}/{levelName}', 'refObjectMonev');
       
         Route::get('ref/get_object_monev/{periode}', 'getObjectMonev');
+        Route::get('ref/get_object_monev/{periode}/{levelName}', 'getObjectMonev');
         Route::post('/ref/add_object/{periode}', 'addObject');
         Route::post('/ref/edit_object/{periode}', 'editObject');
         Route::post('/ref/delete_object', 'deleteObject');

@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <button type="button" class="btn waves-effect waves-light btn-primary" onclick="showModalTambahObject('{{ $periode }}'); return false">Tambah Object</button>
+                            <button type="button" class="btn waves-effect waves-light btn-primary" onclick="showModalTambahObject('{{ $periode }}','{{ $levelName }}'); return false">Tambah Object</button>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -46,7 +46,7 @@
                 var table = $('#table').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: "{{ url('ref/get_object_monev/'.$periode) }}",
+                    ajax: "{{ url('ref/get_object_monev/'.$periode.'/'.$levelName) }}",
                     columns: [{
                             data: 'DT_RowIndex',
                             name: 'DT_RowIndex'
@@ -79,9 +79,9 @@
 
             });
 
-            function showModalTambahObject(periode){
+            function showModalTambahObject(periode,levelName){
                 Livewire.dispatch('show-modal-tambah-object',{
-                    periode
+                    periode, levelName
                 });
             }
             function showModalEdit(id,periode){

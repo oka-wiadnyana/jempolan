@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Level;
 use App\Models\ObjectMonev;
 use App\Models\ObjectMonevQuarterly;
 use App\Models\ObjectMonevSemester;
@@ -16,16 +17,18 @@ use Yajra\DataTables\DataTables;
 
 class RefController extends Controller
 {
-    public function jenisLaporan(){
+    public function jenisLaporan($levelName=null){
         // $data = ReportRef::with('levelName')->latest()->get();
-        // dd($data);
-        return view("admin.daftar_laporan",['title'=>'Ref Laporan']);
+       
+        return view("admin.daftar_laporan",['title'=>'Ref Laporan','levelName'=>$levelName]);
     }
 
-    public function getJenisLaporan(Request $request)
+    public function getJenisLaporan(Request $request,$levelName=null)
     {
+        $levelId=Level::where('level_name',$levelName)->first();
         if ($request->ajax()) {
-            $data = ReportRef::latest()->orderBy('level_id')->get();
+            
+            $data = $levelId?ReportRef::where('level_id',$levelId->id)->get():ReportRef::orderBy('level_id')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -117,25 +120,64 @@ class RefController extends Controller
         return response()->json(['msg'=>'success']);
     }
 
-    public function refObjectMonev(Request $request, $periode){
-        return view('admin.daftar_object',['title'=>'Object Monev '.ucwords($periode),'periode'=>$periode]);
+    public function refObjectMonev(Request $request, $periode,$levelName=null){
+        return view('admin.daftar_object',['title'=>'Object Monev '.ucwords($periode),'periode'=>$periode,'levelName'=>$levelName]);
     }
 
-    public function getObjectMonev(Request $request,$periode)
+    public function getObjectMonev(Request $request,$periode,$levelName=null)
     {
+        
         if ($request->ajax()) {
+            $levelId=Level::where('level_name',$levelName)->first();
+         
             if($periode=='mingguan'){
+                if($levelId){
 
-                $data = ObjectMonevWeekly::orderBy('report_id')->orderBy('report_id')->get();
+                    $data = ObjectMonevWeekly::orderBy('report_id')->whereHas('levelName',function($q) use($levelId){
+                         $q->where('level_id',$levelId->id);
+                     })->get();
+                }else {
+                    $data = ObjectMonevWeekly::orderBy('report_id')->get();
+                }
             }elseif($periode=='bulanan'){
 
-                $data = ObjectMonev::orderBy('report_id')->orderBy('report_id')->get();
+                if($levelId){
+                    $data = ObjectMonev::orderBy('report_id')->whereHas('levelName',function($q) use($levelId){
+                        $q->where('level_id',$levelId->id);
+                    })->get();
+                }else {
+                    $data = ObjectMonev::orderBy('report_id')->get();
+                }
             }elseif($periode=='triwulan'){
-                $data = ObjectMonevQuarterly::orderBy('report_id')->orderBy('report_id')->get();
+                if($levelId){
+                $data = ObjectMonevQuarterly::orderBy('report_id')->whereHas('levelName',function($q) use($levelId){
+                    $q->where('level_id',$levelId->id);
+                })->get();
+                }else {
+                    $data = ObjectMonevQuarterly::orderBy('report_id')->get();
+                }
             }elseif($periode=='semester'){
-                $data = ObjectMonevSemester::orderBy('report_id')->orderBy('report_id')->get();
+                if($levelId){
+                    $data = ObjectMonevSemester::orderBy('report_id')->whereHas('levelName',function($q) use($levelId){
+                        $q->where('level_id',$levelId->id);
+                    })->get();
+                }else{
+                    if($levelId){
+                        $data = ObjectMonevSemester::orderBy('report_id')->whereHas('levelName',function($q) use($levelId){
+                            $q->where('level_id',$levelId->id);
+                        })->get();
+                    }else{
+                        $data = ObjectMonevSemester::orderBy('report_id')->get();
+                    }
+                }
             }elseif($periode=='tahunan'){
-                $data = ObjectMonevYearly::orderBy('report_id')->orderBy('report_id')->get();
+                if($levelId){
+                $data = ObjectMonevYearly::orderBy('report_id')->whereHas('levelName',function($q) use($levelId){
+                    $q->where('level_id',$levelId->id);
+                })->get();
+                }else {
+                    $data = ObjectMonevYearly::orderBy('report_id')->get();
+                }
             }
             return DataTables::of($data)
                 ->addIndexColumn()

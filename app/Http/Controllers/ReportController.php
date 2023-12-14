@@ -73,12 +73,12 @@ class ReportController extends Controller
                 ->addColumn('file_download', function($row){
                     if($row->file){
 
-                        return '<a href="'.asset('weekly_file/'.$row->file).'" class="file btn btn-primary btn-sm" target="_blank">Download</a>';
-                    }else {
+                        return '<a href="" class="upload btn btn-warning btn-sm" onclick="showModalUpload('.$row->id.',\'mingguan\'); return false">Evidence</a> <a href="'.asset('weekly_file/'.$row->file).'" class="file btn btn-primary btn-sm" target="_blank">Download</a>';
+                    }
                         if(auth()->user()->level->level_name!='admin'){
                         return '<a href="" class="upload btn btn-warning btn-sm" onclick="showModalUpload('.$row->id.',\'mingguan\'); return false">Upload</a>';
                         }
-                    }
+                    
                 })
                 ->addColumn('tanggal_laporan', function($row){
                     $report_date=Carbon::parse($row->report_date)->isoFormat('DD MMMM Y');
@@ -303,8 +303,10 @@ class ReportController extends Controller
         $template->setValue('tanggal_laporan', $tanggalRead);
         $template->setValue('jabatan_mengetahui', $mengetahui->jabatanName->nama_jabatan);
         $template->setValue('mengetahui', $mengetahui->nama);
+        $template->setValue('mengetahui_nip', $mengetahui->nip);
         $template->setValue('jabatan_pic', $pic->jabatanName->nama_jabatan);
         $template->setValue('pic', $pic->nama);
+        $template->setValue('pic_nip', $pic->nip);
 
 
         $template->cloneRowAndSetValues('no', $data_template);
@@ -361,7 +363,7 @@ class ReportController extends Controller
             
        
       
-        return redirect()->to(url('report/mingguan/perdata'))->with('success','Data berhasil disimpan');
+        return redirect()->back()->with('success','Data berhasil disimpan');
         
 
 
@@ -393,7 +395,7 @@ class ReportController extends Controller
             ],
         );
 
-        return redirect()->to(url('report/mingguan/perdata'))->with('success','File berhasil disimpan');
+        return redirect()->back()->with('success','File berhasil disimpan');
         
     }
 
